@@ -5,7 +5,7 @@ import cors from 'cors';
 import authRoutes from './features/auth/route/authRoute.js';
 import { requireAuth, requireRole } from './features/auth/middlewear/authMiddlewear.js';
 import deviceRoutes from './features/device/route/deviceRoute.js';
-
+import mediaRoutes from './features/media/route/mediaRoute.js';
 
 dotenv.config();
 const app = express();
@@ -21,7 +21,7 @@ app.get('/api/admin-only', requireAuth, requireRole([1, 2]), (req, res) => {
 
 app.use('/api/devices', deviceRoutes);
 
-
+app.use('/api/media', mediaRoutes);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server started on port ${process.env.PORT || 5000}`);
