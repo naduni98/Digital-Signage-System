@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Digital-Signage-System/static/css/main.9da4c2ce.css",
-    "main.js": "/Digital-Signage-System/static/js/main.9de0a482.js",
+    "main.js": "/Digital-Signage-System/static/js/main.7a98dff7.js",
     "static/js/453.88f79bd3.chunk.js": "/Digital-Signage-System/static/js/453.88f79bd3.chunk.js",
     "index.html": "/Digital-Signage-System/index.html",
     "main.9da4c2ce.css.map": "/Digital-Signage-System/static/css/main.9da4c2ce.css.map",
-    "main.9de0a482.js.map": "/Digital-Signage-System/static/js/main.9de0a482.js.map",
+    "main.7a98dff7.js.map": "/Digital-Signage-System/static/js/main.7a98dff7.js.map",
     "453.88f79bd3.chunk.js.map": "/Digital-Signage-System/static/js/453.88f79bd3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9da4c2ce.css",
-    "static/js/main.9de0a482.js"
+    "static/js/main.7a98dff7.js"
   ]
 }
