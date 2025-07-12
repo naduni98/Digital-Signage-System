@@ -8,7 +8,7 @@ import {
   FaPhotoVideo,
   FaCog,
 } from 'react-icons/fa';
-import './SidebarShadow.css';
+
 
 export default function Sidebar() {
   const [expanded, setExpanded] = useState(false);
@@ -21,9 +21,10 @@ export default function Sidebar() {
         fixed left-0 top-1/2 -translate-y-1/2
         flex flex-col text-white transition-all duration-300
         ${expanded ? 'w-64' : 'w-20'}
-        bg-gradient-to-b from-gray-900 to-blue-900
+        bg-gradient-to-b from-[#232528] to-[#1d1d22]
         rounded-tr-[30px] rounded-br-[30px]
-        h-[500px] mt-[32px]
+        h-[500px] mt-[40px]
+
         z-50
       `}
     >

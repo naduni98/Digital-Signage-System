@@ -2,6 +2,7 @@
 import React from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import Sidebar from './Sidebar';
 
 export default function ProtectedLayout({ children }) {
   return (
@@ -13,7 +14,10 @@ export default function ProtectedLayout({ children }) {
       <div className="flex">
         <Sidebar />
 
-        <main className="flex-1 min-h-screen bg-gray-50 px-32 py-6 pt-[96px]">
+        <main className="min-h-screen bg-[#222831] px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32
+ py-6 pt-[96px] w-full">
+
+
           {children}
         </main>
       </div>

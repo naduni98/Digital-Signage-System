@@ -6,11 +6,13 @@ import authRoutes from './features/auth/route/authRoute.js';
 import { requireAuth, requireRole } from './features/auth/middlewear/authMiddlewear.js';
 import deviceRoutes from './features/device/route/deviceRoute.js';
 import mediaRoutes from './features/media/route/mediaRoute.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
 
