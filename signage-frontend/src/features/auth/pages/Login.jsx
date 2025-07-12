@@ -20,7 +20,7 @@ export default function Login() {
 
       // Navigate based on role
       if (roleId === 1 || roleId === 2) {
-        navigate('/dashboard');
+        navigate('/users');
       } else if (roleId === 3) {
         navigate('/media');
       } else {
