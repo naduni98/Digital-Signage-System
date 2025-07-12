@@ -16,7 +16,7 @@ export default function Header() {
   };
 
     return (
-    <header className="flex items-center justify-between bg-[#1E232A] px-32 py-6 shadow-md">
+    <header className="fixed top-0 left-0 w-full flex items-center justify-between bg-[#222831] px-32 py-6 shadow-xl">
       {/* Left - Logo and Title */}
       <div className="flex items-center gap-3">
         <img src="/Digital-Signage-System/assets/logo01.png" alt="PAGOON" className="w-8 h-8" />

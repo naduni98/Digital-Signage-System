@@ -2,27 +2,36 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { db } from '../../../db/index.js';
 import { users } from '../../../db/schema/users.js';
-import { eq,or } from 'drizzle-orm';
+import { eq,or,desc } from 'drizzle-orm';
 
-export const register = async ({ username, password, roleId }) => {
+export const register = async ({ username, password, roleId,firstName, lastName, email }) => {
  
     const existingUser = await db
     .select()
     .from(users)
-    .where(or(eq(users.username, username), eq(users.username, username)));
+    .where(or(eq(users.username, username), eq(users.email, email)));
 
-
-  if (existingUser) {
+console.log('existingUser result:', existingUser); 
+  if (existingUser.length > 0) {
     throw new Error('Username or email already in use');
   }
+  // 🔢 Step 1: Count existing users
+  const countResult = await db.select().from(users);
+  const nextNumber = countResult.length + 1;
+
+  // 🆔 Step 2: Format userId like PGN01, PGN02...
+  const formattedUserId = `PGN${String(nextNumber).padStart(4, '0')}`;
+
  
   const hashedPassword = await bcrypt.hash(password, 10);
-  await db.insert(users).values({ username, password: hashedPassword, roleId });
+  await db.insert(users).values({ userId: formattedUserId,username, password: hashedPassword, first_name: firstName,
+  last_name: lastName,
+    email,
+    roleId, });
 };
 
-export const login = async ({ username, password }) => {
-  const [user] = await db.select().from(users).where(eq(users.username, username));
-
+export const login = async ({ email, password }) => {
+  const [user] = await db.select().from(users).where(eq(users.email, email),eq(users.status, 1));
   if (!user || !(await bcrypt.compare(password, user.password))) {
     throw new Error('Invalid credentials');
   }
@@ -35,3 +44,23 @@ export const login = async ({ username, password }) => {
 
   return { token, username: user.username, roleId: user.roleId };
 };
+
+
+
+export const getAllUsers = async () => {
+  const allUsers = await db.select().from(users).where(eq(users.status, 1)).orderBy(desc(users.created_at));
+  return allUsers;
+};
+
+export const softDeleteUser = async (id) => {
+  await db.update(users)
+    .set({ status: 0 })
+    .where(eq(users.id, id));
+};
+
+export const reactivateUser = async (id) => {
+  await db.update(users)
+    .set({ status: 1 })
+    .where(eq(users.id, id));
+};
+
