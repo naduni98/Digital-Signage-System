@@ -6,6 +6,7 @@ export default function MediaPage() {
 
 
   return (
+
     
 
     <div>
@@ -14,5 +15,6 @@ export default function MediaPage() {
 <div>jiii</div>
      
     </div>
+
   );
 }

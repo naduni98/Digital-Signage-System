@@ -24,6 +24,7 @@ export default function Sidebar() {
         bg-gradient-to-b from-[#232528] to-[#1d1d22]
         rounded-tr-[30px] rounded-br-[30px]
         h-[500px] mt-[40px]
+
         z-50
       `}
     >
