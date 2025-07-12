@@ -3,6 +3,6 @@ import React from 'react';
 
 export default function MediaPage() {
   return (
-    <div>hiii</div>
+    <div className='mt-8'>hiii</div>
   );
 }
