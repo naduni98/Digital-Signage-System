@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function TopSection({ page = 'users' }) {
+export default function TopSection({ page = 'users',onAdd  }) {
   const titleMap = {
     users: 'User Management',
     devices: 'Device Management',
@@ -48,7 +48,13 @@ export default function TopSection({ page = 'users' }) {
         {/* Right Side: Clock and Button */}
         <div className="flex items-center gap-4">
          
-          <button className="bg-gradient-to-r from-blue-500 to-blue-400 text-white px-5 py-2 rounded-md font-medium hover:opacity-90 whitespace-nowrap">
+          <button 
+          onClick={() => {
+  console.log("Add User button clicked");
+  onAdd();
+}}
+
+          className="bg-gradient-to-r from-blue-500 to-blue-400 text-white px-5 py-2 rounded-md font-medium hover:opacity-90 whitespace-nowrap">
             {buttonMap[page] || 'Add'}
           </button>
         </div>

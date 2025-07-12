@@ -2,9 +2,10 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { db } from '../../../db/index.js';
 import { users } from '../../../db/schema/users.js';
+import { userRoles } from '../../../db/schema/user_roles.js';
 import { eq,or,desc } from 'drizzle-orm';
 
-export const register = async ({ username, password, roleId,firstName, lastName, email }) => {
+export const register = async ({ username, password, roleId,firstName, lastName, email,avatar }) => {
  
     const existingUser = await db
     .select()
@@ -24,10 +25,11 @@ console.log('existingUser result:', existingUser);
 
  
   const hashedPassword = await bcrypt.hash(password, 10);
-  await db.insert(users).values({ userId: formattedUserId,username, password: hashedPassword, first_name: firstName,
-  last_name: lastName,
+  await db.insert(users).values({ userId: formattedUserId,username, password: hashedPassword, firstName,
+    lastName,
     email,
-    roleId, });
+    roleId,
+  avatar });
 };
 
 export const login = async ({ email, password }) => {
@@ -47,9 +49,31 @@ export const login = async ({ email, password }) => {
 
 
 
+// export const getAllUsers = async () => {
+//   const allUsers = await db.select().from(users).where(eq(users.status, 1)).orderBy(desc(users.created_at));
+//   return allUsers;
+// };
+
 export const getAllUsers = async () => {
-  const allUsers = await db.select().from(users).where(eq(users.status, 1)).orderBy(desc(users.created_at));
-  return allUsers;
+  const rows = await db
+    .select({
+      id: users.id,
+      userId: users.userId,
+      username: users.username,
+      email: users.email,
+      roleId: users.roleId,
+      roleName: userRoles.roleName, // joined
+      status: users.status,
+      created_at: users.created_at,
+      last_login: users.last_login,
+      firstName: users.firstName,
+      lastName: users.lastName,
+    })
+    .from(users)
+    .leftJoin(userRoles, eq(users.roleId, userRoles.id))
+    .where(eq(users.status, 1));
+
+  return rows;
 };
 
 export const softDeleteUser = async (id) => {

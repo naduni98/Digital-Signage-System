@@ -11,6 +11,7 @@ export const users = mysqlTable('users', {
   email: varchar('email', { length: 255 }),
   roleId: int('role_id').notNull(), // FK to user_roles.id
   status: int('status').default(1),
+  avatar: varchar('avatar', { length: 255 }), // optional
   created_at: timestamp('created_at').defaultNow(),
   last_login: timestamp('last_login').defaultNow(),
 });
