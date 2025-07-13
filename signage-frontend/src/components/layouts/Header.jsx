@@ -8,7 +8,8 @@ import { clearAuthData, getAuthData } from '../../features/auth/utils/token';
 export default function Header() {
    const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
-  const { username } = getAuthData();
+  const { username,avatar } = getAuthData();
+
 
   const handleLogout = () => {
     clearAuthData();
@@ -20,7 +21,7 @@ export default function Header() {
 
       {/* Left - Logo and Title */}
       <div className="flex items-center gap-3">
-        <img src="/Digital-Signage-System/assets/logo01.png" alt="PAGOON" className="w-8 h-8" />
+        <img src="/assets/logo01.png" alt="PAGOON" className="w-8 h-8" />
         <h1 className="text-white font-semibold text-lg tracking-wide">PAGOON</h1>
       </div>
 
@@ -34,18 +35,31 @@ export default function Header() {
         <div className="flex items-center gap-2 cursor-pointer relative" onClick={() => setDropdownOpen(!dropdownOpen)}>
 
           <span className="text-white text-sm">{username}</span>
-          <FaChevronDown className="text-white text-xs" />
+          {/* <FaChevronDown className="text-white text-xs" /> */}
+
+          {avatar && (
+            <img
+              src={avatar}
+              alt="avatar"
+              className="w-8 h-8 rounded-full object-cover border border-white"
+            />
+          )}
 
           {/* Dropdown menu */}
           {dropdownOpen && (
-            <div className="absolute right-0 top-12 bg-white shadow-md rounded-md overflow-hidden z-10">
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 text-sm text-left w-full hover:bg-gray-100 text-red-600"
-              >
-                Logout
-              </button>
-            </div>
+            <div className="absolute right-0 top-12 w-48 bg-[#2f3237] shadow-xl rounded-xl overflow-hidden z-10 border border-[#444]">
+              <div className="px-4 py-3 border-b border-[#3a3d42] text-white text-sm">
+    Signed in as {username}
+   
+  </div>
+
+  <button
+    onClick={handleLogout}
+    className="px-4 py-3 w-full text-left text-white hover:bg-[#3c3f45] text-sm transition duration-150"
+  >
+    Logout
+  </button>
+</div>
           )}
         </div>
       </div>

@@ -13,11 +13,13 @@ const userSchema = z.object({
   lastName: z.string().min(1),
   email: z.string().email(),
   roleId: z.number().int(),
+  avatar: z.string().optional(), 
 });
 
 router.post('/register', async (req, res) => {
   try {
     const data = userSchema.parse(req.body);
+    console.log("🚀 Parsed registration data:", data); 
     await AuthService.register(data);
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
@@ -43,7 +45,7 @@ router.get('/users', requireAuth, requireRole([1, 2]), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-router.put('/soft-delete/:id', requireAuth, requireRole([1]), async (req, res) => {
+router.put('/soft-delete/:id', requireAuth, requireRole([1,2]), async (req, res) => {
   try {
     const userId = parseInt(req.params.id);
     await AuthService.softDeleteUser(userId);

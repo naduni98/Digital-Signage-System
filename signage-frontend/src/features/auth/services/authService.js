@@ -19,3 +19,36 @@ export const getAllUsers = async () => {
 
   return response.data;
 };
+
+// src/auth/services/authService.js
+
+// src/features/auth/services/authService.js
+export const registerUser = async (data) => {
+  const res = await fetch("http://localhost:5000/api/auth/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  const result = await res.json();
+  if (!res.ok) {
+    throw new Error(result.error || "Registration failed");
+  }
+  return result;
+};
+
+export const softDeleteUser = async (id) => {
+  
+  const res = await fetch(`http://localhost:5000/api/auth/soft-delete/${id}`, {
+    method: "PUT",
+     headers: {
+      Authorization: `Bearer ${token}`
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to soft delete user");
+  }
+
+  return res.json();
+};

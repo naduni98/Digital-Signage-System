@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-export default function UserTable({ users = [] }) {
+export default function UserTable({ users = [], onToggleStatus }) {
   return (
     <div className="overflow-x-auto rounded-b-md text-white">
       <table className="w-full text-left">
@@ -27,19 +27,21 @@ export default function UserTable({ users = [] }) {
               <td className="py-3 px-4">{user.userId}</td>
               <td className="py-3 px-4">{user.username}</td>
               <td className="py-3 px-4">{user.email}</td>
-              <td className="py-3 px-4">{user.roleId}</td>
+              <td className="py-3 px-4">{user.roleName}</td>
               <td className="py-3 px-4">{user.last_login}</td>
-<td className="py-3 px-4">
-  <span
-    className={`inline-block px-3 py-1 rounded-full text-[12px] font-medium transition-colors duration-200 ${
-      user.status ? 'bg-green-900 text-lime-400 text-[12px]' : 'bg-red-900 text-red-300'
-    }`}
-  >
-    {user.status ? 'Active' : 'Inactive'}
-  </span>
-</td>
-
               <td className="py-3 px-4">
+                <span
+                  className={`inline-block px-3 py-1 rounded-full text-[12px] font-medium transition-colors duration-200 ${
+                    user.status
+                      ? "bg-green-900 text-lime-400 text-[12px]"
+                      : "bg-red-900 text-red-300"
+                  }`}
+                >
+                  {user.status === 1 ? "Active" : "Inactive"}
+                </span>
+              </td>
+
+              {/* <td className="py-3 px-4">
                 <label className="inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
@@ -49,17 +51,39 @@ export default function UserTable({ users = [] }) {
                   />
                   <div
                     className={`w-11 h-6 rounded-full transition-colors ${
-                      user.active ? 'bg-blue-500' : 'bg-gray-400'
+                      user.active ? "bg-blue-500" : "bg-gray-400"
                     } relative`}
                   >
                     <div
                       className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                        user.active ? 'translate-x-5' : ''
+                        user.active ? "translate-x-5" : ""
                       }`}
                     />
                   </div>
                 </label>
-              </td>
+              </td> */}
+              <td className="py-3 px-4">
+  <label className="inline-flex items-center cursor-pointer">
+    <input
+      type="checkbox"
+      checked={user.status === 1}
+      onChange={() => onToggleStatus(user.id)}
+      className="sr-only"
+    />
+    <div
+      className={`w-11 h-6 rounded-full transition-colors ${
+        user.status === 1 ? "bg-blue-500" : "bg-gray-400"
+      } relative`}
+    >
+      <div
+        className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform ${
+          user.status === 1 ? "translate-x-5" : ""
+        }`}
+      />
+    </div>
+  </label>
+</td>
+
             </tr>
           ))}
         </tbody>
