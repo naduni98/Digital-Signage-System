@@ -24,7 +24,7 @@ export default function Sidebar() {
         bg-gradient-to-b from-[#232528] to-[#1d1d22]
         rounded-tr-[30px] rounded-br-[30px]
         h-[500px] mt-[40px]
-
+        border-t-2 border-b-2 border-[#4361EE]
         z-50
       `}
     >
@@ -32,7 +32,7 @@ export default function Sidebar() {
       <div className="flex items-center justify-between px-4 py-5">
         <div className="flex items-center space-x-2">
           <img
-            src="/Digital-Signage-System/assets/logo01.png"
+            src="/assets/logo01.png"
             alt="Logo"
             className="w-8 h-8"
           />

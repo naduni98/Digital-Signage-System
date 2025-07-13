@@ -16,6 +16,7 @@ async function seedAdmin() {
       first_name: 'admin',
       last_name: 'admin',
       email: 'admin@gmail.com',
+      avatar:'/assets/avatars/avatar2.png',
       roleId: 2,
       status: 1
     });

@@ -36,3 +36,19 @@ export const registerUser = async (data) => {
   }
   return result;
 };
+
+export const softDeleteUser = async (id) => {
+  
+  const res = await fetch(`http://localhost:5000/api/auth/soft-delete/${id}`, {
+    method: "PUT",
+     headers: {
+      Authorization: `Bearer ${token}`
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to soft delete user");
+  }
+
+  return res.json();
+};
