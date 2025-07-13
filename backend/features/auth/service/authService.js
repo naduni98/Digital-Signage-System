@@ -29,7 +29,7 @@ console.log('existingUser result:', existingUser);
     lastName,
     email,
     roleId,
-  avatar });
+  avatar: avatar ?? null });
 };
 
 export const login = async ({ email, password }) => {
@@ -39,12 +39,12 @@ export const login = async ({ email, password }) => {
   }
 
   const token = jwt.sign(
-    { id: user.id, username: user.username, roleId: user.roleId },
+    { id: user.id, username: user.username, roleId: user.roleId,avatar:user.avatar },
     process.env.JWT_SECRET,
     { expiresIn: '1h' }
   );
 
-  return { token, username: user.username, roleId: user.roleId };
+  return { token, username: user.username, roleId: user.roleId,avatar:user.avatar };
 };
 
 

@@ -15,8 +15,8 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const { token, username, roleId } = await loginUser(email, password);
-      saveAuthData({ token, username, roleId });
+      const { token, username, roleId,avatar } = await loginUser(email, password);
+      saveAuthData({ token, username, roleId,avatar});
 
       // Navigate based on role
       if (roleId === 1 || roleId === 2) {
@@ -36,12 +36,12 @@ export default function Login() {
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{
-        backgroundImage: "url('/Digital-Signage-System/assets/bg.jpg')",
+        backgroundImage: "url('/assets/bg.jpg')",
       }}
     >
       <div className="bg-black bg-opacity-60 p-8 rounded-lg max-w-md w-full">
         <div className="flex flex-col items-center mb-6">
-          <img src="/Digital-Signage-System/assets/logo01.png" alt="Logo" className="w-20 h-20 mb-4" />
+          <img src="/assets/logo01.png" alt="Logo" className="w-20 h-20 mb-4" />
           <h2 className="text-2xl font-semibold text-white">Welcome Back</h2>
           <p className="text-sm text-gray-400">Simple Signs, Smart Solutions</p>
         </div>

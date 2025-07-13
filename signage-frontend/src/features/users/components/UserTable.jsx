@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function UserTable({ users = [] }) {
+export default function UserTable({ users = [], onToggleStatus }) {
   return (
     <div className="overflow-x-auto rounded-b-md text-white">
       <table className="w-full text-left">
@@ -37,11 +37,11 @@ export default function UserTable({ users = [] }) {
                       : "bg-red-900 text-red-300"
                   }`}
                 >
-                  {user.status ? "Active" : "Inactive"}
+                  {user.status === 1 ? "Active" : "Inactive"}
                 </span>
               </td>
 
-              <td className="py-3 px-4">
+              {/* <td className="py-3 px-4">
                 <label className="inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
@@ -61,7 +61,29 @@ export default function UserTable({ users = [] }) {
                     />
                   </div>
                 </label>
-              </td>
+              </td> */}
+              <td className="py-3 px-4">
+  <label className="inline-flex items-center cursor-pointer">
+    <input
+      type="checkbox"
+      checked={user.status === 1}
+      onChange={() => onToggleStatus(user.id)}
+      className="sr-only"
+    />
+    <div
+      className={`w-11 h-6 rounded-full transition-colors ${
+        user.status === 1 ? "bg-blue-500" : "bg-gray-400"
+      } relative`}
+    >
+      <div
+        className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform ${
+          user.status === 1 ? "translate-x-5" : ""
+        }`}
+      />
+    </div>
+  </label>
+</td>
+
             </tr>
           ))}
         </tbody>
