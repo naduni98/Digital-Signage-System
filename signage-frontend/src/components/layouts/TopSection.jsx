@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function TopSection({ page = "users", onAdd }) {
   const titleMap = {
@@ -13,6 +13,26 @@ export default function TopSection({ page = "users", onAdd }) {
     media: "Add Media",
   };
 
+  const [time, setTime] = useState(getCurrentTime());
+
+  // Helper function to format current time as HH:MM AM/PM
+  function getCurrentTime() {
+    const now = new Date();
+    return now.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(getCurrentTime());
+    }, 1000); // update every second
+
+    return () => clearInterval(interval); // cleanup
+  }, []);
+
   return (
     <div className="w-full text-white rounded-t-md  space-y-4">
       {/* Row 1: Title */}
@@ -21,7 +41,7 @@ export default function TopSection({ page = "users", onAdd }) {
           {titleMap[page] || "Management"}
         </div>
         <span className="text-sm text-gray-300 whitespace-nowrap">
-          08:38 PM
+          {time}
         </span>
       </div>
 
@@ -52,7 +72,7 @@ export default function TopSection({ page = "users", onAdd }) {
               console.log("Add User button clicked");
               onAdd();
             }}
-            className="bg-[#4361EE] text-white px-5 py-2 rounded-md font-medium hover:opacity-90 whitespace-nowrap"
+            className="bg-[#4361EE] text-white px-8 py-2 rounded-2xl font-medium hover:opacity-90 whitespace-nowrap"
           >
             {buttonMap[page] || "Add"}
           </button>
