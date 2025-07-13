@@ -3,7 +3,6 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
-
 export default function ProtectedLayout({ children }) {
   return (
     <div className="min-h-screen bg-gray-100">
